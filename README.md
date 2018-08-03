@@ -30,6 +30,7 @@ body
     2. set return type & function Args
     3. create function Resolve return value
 3. add function for variables
+4. add enum
 
 ## variables
 ```
@@ -45,3 +46,27 @@ QUERY VARIABLES
   "TaskID": 1
 }
 ```
+### Enum
+新增Enum type, 在Schema type 中 宣告變數為 enum type
+包含Enum的資料
+get author
+```
+query get($AuthorName: String!) {
+  getAuthorByName(name: $AuthorName) {
+		name
+    age
+    gendor #return "male"
+    books{
+      title
+      author
+      series
+    }
+  }
+}
+
+
+{
+  "AuthorName": "Brandon Sanderson"
+}
+```
+

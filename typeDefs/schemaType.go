@@ -25,9 +25,10 @@ func init() {
 	AuthorType = graphql.NewObject(graphql.ObjectConfig{
 		Name: "Author",
 		Fields: graphql.Fields{
-			"name":  &graphql.Field{Type: graphql.String},
-			"age":   &graphql.Field{Type: graphql.Int},
-			"books": &graphql.Field{Type: graphql.NewList(TextBookType)},
+			"name":   &graphql.Field{Type: graphql.String},
+			"age":    &graphql.Field{Type: graphql.Int},
+			"books":  &graphql.Field{Type: graphql.NewList(TextBookType)},
+			"gendor": {Type: AuthorStateEnumType},
 		},
 	})
 

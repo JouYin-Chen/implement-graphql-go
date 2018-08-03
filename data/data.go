@@ -8,9 +8,10 @@ type TextBook struct {
 	Author string `json:"author"`
 }
 type Author struct {
-	Name string `json:"name"`
-	Age  int    `json:"age"`
-	Books []TextBook `json:"books"`
+	Name   string     `json:"name"`
+	Age    int        `json:"age"`
+	Gendor int        `json:gendor`
+	Books  []TextBook `json:"books"`
 }
 
 var TextBookList []TextBook
@@ -30,7 +31,8 @@ func init() {
 			"J. K. Rowling",
 		},
 	}
-	JK := Author{Name: "J. K. Rowling", Age: 53, Books: JKBookList}
+
+	JK := Author{Name: "J. K. Rowling", Age: 53, Gendor: 0, Books: JKBookList}
 
 	MBookList := []TextBook{
 		TextBook{
@@ -50,7 +52,7 @@ func init() {
 		},
 	}
 
-	Martin := Author{Name: "George R R Martin", Age: 69, Books: MBookList}
+	Martin := Author{Name: "George R R Martin", Age: 69, Gendor: 1, Books: MBookList}
 
 	BBookList := []TextBook{
 		TextBook{
@@ -64,7 +66,8 @@ func init() {
 			"Brandon Sanderson",
 		},
 	}
-	Brandon := Author{Name: "Brandon Sanderson", Age: 42, Books: BBookList}
+
+	Brandon := Author{Name: "Brandon Sanderson", Age: 42, Gendor: 1, Books: BBookList}
 
 	AuthorList = append(AuthorList, JK, Martin, Brandon)
 	TextBookList = append(TextBookList, JKBookList...)
