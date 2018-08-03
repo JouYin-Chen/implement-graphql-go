@@ -31,6 +31,7 @@ body
     3. create function Resolve return value
 3. add function for variables
 4. add enum
+5. create Mutation function
 
 ## variables
 ```
@@ -46,6 +47,21 @@ QUERY VARIABLES
   "TaskID": 1
 }
 ```
+
+## mutation
+```
+mutation {
+  reateAuthor {
+    name
+    age
+    books {
+      title
+      series
+    }
+  }
+}
+```
+
 ### Enum
 新增Enum type, 在Schema type 中 宣告變數為 enum type
 包含Enum的資料

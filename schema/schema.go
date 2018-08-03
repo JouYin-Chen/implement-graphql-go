@@ -9,7 +9,8 @@ import (
 
 var Schema, _ = graphql.NewSchema(
 	graphql.SchemaConfig{
-		Query: rootQuery,
+		Query:    rootQuery,
+		Mutation: rootMutation,
 	},
 )
 
@@ -85,6 +86,40 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 					}
 				}
 				return nil, nil
+			},
+		},
+	},
+})
+
+var rootMutation = graphql.NewObject(graphql.ObjectConfig{
+	Name: "RootMutation",
+	Fields: graphql.Fields{
+		"createAuthor": &graphql.Field{
+			Type: graphql.NewList(typeDefs.AuthorType), // the return type for this field
+
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				// marshall and cast the argument value
+				// perform mutation operation here
+				// for e.g. create a Todo and save to DB.
+
+				newAuthor := data.Author{
+					Name:   "Louis Cha Leung-yung",
+					Age:    94,
+					Gendor: 1,
+					Books: []data.TextBook{
+						data.TextBook{"射鵰英雄傳", 4, "Louis Cha Leung-yung"},
+						data.TextBook{"神鵰俠侶", 4, "Louis Cha Leung-yung"},
+						data.TextBook{"倚天屠龍記", 4, "Louis Cha Leung-yung"},
+					},
+				}
+
+				data.AuthorList = append(data.AuthorList, newAuthor)
+				// return the new Todo object that we supposedly save to DB
+				// Note here that
+				// - we are returning a `Todo` struct instance here
+				// - we previously specified the return Type to be `todoType`
+				// - `Todo` struct maps to `todoType`, as defined in `todoType` ObjectConfig`
+				return data.AuthorList, nil
 			},
 		},
 	},
