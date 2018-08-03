@@ -51,6 +51,37 @@ var rootQuery = graphql.NewObject(graphql.ObjectConfig{
 				return data.TextBookList, nil
 			},
 		},
+		"getBooksByTitle": &graphql.Field{
+			Type: graphql.NewObject(graphql.ObjectConfig{
+				Name: "getBookByTitleInterface",
+				Fields: graphql.Fields{
+					"title": {
+						Type: graphql.String,
+					},
+					"series": {
+						Type: graphql.Int,
+					},
+				},
+				Interfaces: []*graphql.Interface{
+					typeDefs.BookInterface,
+				},
+			}),
+			Args: graphql.FieldConfigArgument{
+				"title": &graphql.ArgumentConfig{
+					Type: graphql.NewNonNull(graphql.String),
+				},
+			},
+			Resolve: func(p graphql.ResolveParams) (interface{}, error) {
+				if title, ok := p.Args["title"].(string); ok {
+					for _, d := range data.TextBookList {
+						if title == d.Title {
+							return d, nil
+						}
+					}
+				}
+				return nil, nil
+			},
+		},
 		"getBookAndAuthor": &graphql.Field{
 			Type: graphql.NewObject(graphql.ObjectConfig{
 				Name: "getBookAndAuthor",

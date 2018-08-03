@@ -32,6 +32,7 @@ body
 3. add function for variables
 4. add enum
 5. create Mutation function
+6. 修改 資料格式 新增interface
 
 ## variables
 ```
@@ -86,3 +87,26 @@ query get($AuthorName: String!) {
 }
 ```
 
+##interface
+
+修改data 格式
+新增interface type
+將Schema book type 加入 BookInterface type
+query schema 中有需要使用到 interface 變數的 return value 就要加上interface的宣告
+
+```
+query implementInterface($BookTitle: String!) {
+  getBooksByTitle(title: $BookTitle) {
+    ... on getBookByTitleInterface {
+      # series
+      title
+    }
+	series
+# title
+  }
+}
+
+{
+  "BookTitle": "A Game of Thrones"
+}
+```
