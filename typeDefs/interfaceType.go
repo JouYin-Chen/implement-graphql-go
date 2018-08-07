@@ -5,7 +5,7 @@ import (
 )
 
 var BookInterface = graphql.NewInterface(graphql.InterfaceConfig{
-	Name: "Interface",
+	Name: "BookInterface",
 	Fields: graphql.Fields{
 		"title": &graphql.Field{
 			Type: graphql.String,

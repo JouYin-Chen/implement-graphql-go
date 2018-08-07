@@ -65,6 +65,24 @@ mutation {
 
 ### Enum
 新增Enum type, 在Schema type 中 宣告變數為 enum type
+
+查詢
+
+```
+query tryEnum($pID: TaskStateEnum, $name: String){
+  projectByNameAndState(state: $pID, name: $name){
+    id
+    name
+    state
+  }
+}
+
+{
+  "pID": "inProgress",
+  "name": "Learn React Native"
+}
+
+```
 包含Enum的資料
 get author
 ```
@@ -109,4 +127,26 @@ query implementInterface($BookTitle: String!) {
 {
   "BookTitle": "A Game of Thrones"
 }
+```
+
+## union
+```
+  {
+    __typename
+    getAuthor(name:"Brandon Sanderson"){
+      name
+      age
+      gendor
+      books{
+        ... on TextBook {
+          title
+          series
+        }
+        ... on ShortStory {
+          title
+          chapters
+        }
+      }
+    }
+  }
 ```
